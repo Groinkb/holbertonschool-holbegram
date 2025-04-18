@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddImage extends StatelessWidget {
-  const AddImage({Key? key}) : super(key: key);
+class Favorite extends StatelessWidget {
+  const Favorite({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class AddImage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(
-          'Add Post',
+          'Favorites',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -21,13 +21,13 @@ class AddImage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Icon(
-              Icons.add_photo_alternate,
+              Icons.favorite,
               size: 100,
               color: Colors.grey,
             ),
             SizedBox(height: 20),
             Text(
-              'Upload a photo',
+              'Your favorite posts',
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.grey,
