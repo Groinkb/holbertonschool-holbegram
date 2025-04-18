@@ -1,53 +1,57 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Post {
-  final String postId;
+class Users {
   final String uid;
+  final String email;
   final String username;
-  final String caption;
-  final String postUrl;
-  final String profImage;
-  final DateTime datePublished;
-  final List<dynamic> likes;
-  final List<dynamic> comments;
+  final String bio;
+  final String photoUrl;
+  final List<dynamic> followers;
+  final List<dynamic> following;
+  final List<dynamic> posts;
+  final List<dynamic> saved;
+  final String searchKey;
 
-  Post({
-    required this.postId,
+  Users({
     required this.uid,
+    required this.email,
     required this.username,
-    required this.caption,
-    required this.postUrl,
-    required this.profImage,
-    required this.datePublished,
-    required this.likes,
-    required this.comments,
+    required this.bio,
+    required this.photoUrl,
+    required this.followers,
+    required this.following,
+    required this.posts,
+    required this.saved,
+    required this.searchKey,
   });
 
-  static Post fromSnap(DocumentSnapshot snap) {
+  static Users fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
-    return Post(
-      postId: snapshot['postId'] ?? '',
+    return Users(
       uid: snapshot['uid'] ?? '',
+      email: snapshot['email'] ?? '',
       username: snapshot['username'] ?? '',
-      caption: snapshot['caption'] ?? '',
-      postUrl: snapshot['postUrl'] ?? '',
-      profImage: snapshot['profImage'] ?? '',
-      datePublished: (snapshot['datePublished'] as Timestamp).toDate(),
-      likes: snapshot['likes'] ?? [],
-      comments: snapshot['comments'] ?? [],
+      bio: snapshot['bio'] ?? '',
+      photoUrl: snapshot['photoUrl'] ?? '',
+      followers: snapshot['followers'] ?? [],
+      following: snapshot['following'] ?? [],
+      posts: snapshot['posts'] ?? [],
+      saved: snapshot['saved'] ?? [],
+      searchKey: snapshot['searchKey'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'postId': postId,
         'uid': uid,
+        'email': email,
         'username': username,
-        'caption': caption,
-        'postUrl': postUrl,
-        'profImage': profImage,
-        'datePublished': datePublished,
-        'likes': likes,
-        'comments': comments,
+        'bio': bio,
+        'photoUrl': photoUrl,
+        'followers': followers,
+        'following': following,
+        'posts': posts,
+        'saved': saved,
+        'searchKey': searchKey,
       };
 }
