@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:holbegram/models/user.dart';
 import 'package:holbegram/provider/user_provider.dart';
+import 'package:holbegram/screens/pages/methods/post_storage.dart';
 import 'package:provider/provider.dart';
 
 class Posts extends StatefulWidget {
@@ -79,12 +80,31 @@ class _PostsState extends State<Posts> {
                             const Spacer(),
                             IconButton(
                               icon: const Icon(Icons.more_horiz),
-                              onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Post Deleted'),
-                                  ),
-                                );
+                              onPressed: () async {
+                                try {
+                                  // Import the PostStorage class
+                                  final postStorage = PostStorage();
+
+                                  // Delete the post
+                                  await postStorage.deletePost(
+                                    data['postId'] ?? '',
+                                    data['publicId'] ?? '',
+                                  );
+
+                                  // Show success message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Post Deleted'),
+                                    ),
+                                  );
+                                } catch (e) {
+                                  // Show error message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('Error deleting post: $e'),
+                                    ),
+                                  );
+                                }
                               },
                             ),
                           ],
